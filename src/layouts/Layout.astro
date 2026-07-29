@@ -1,23 +1,148 @@
+---
+export interface Props {
+  title: string;
+  active: 'home' | 'bio' | 'contact';
+}
+const { title, active } = Astro.props;
+---
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
-	</head>
-	<body>
-		<slot />
-	</body>
-</html>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{title} — Sundial Color Works</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;1,400&family=Inter:wght@400;500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="sky"></div>
 
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
+  <header class="nav">
+    <a class="brand" href="/">
+      <span class="brand-mark" aria-hidden="true">
+        <!-- Placeholder eguzkilore mark — swap this <img> for your final rendering -->
+        <svg viewBox="0 0 100 100" width="28" height="28">
+          <g fill="none" stroke="#f4f2ec" stroke-width="1.4">
+            <circle cx="50" cy="50" r="10"/>
+            <g>
+              <path d="M50 8 L58 38 L42 38 Z"/>
+              <path d="M50 92 L58 62 L42 62 Z"/>
+              <path d="M8 50 L38 42 L38 58 Z"/>
+              <path d="M92 50 L62 42 L62 58 Z"/>
+              <path d="M20 20 L42 40 L28 42 Z"/>
+              <path d="M80 80 L58 60 L72 58 Z"/>
+              <path d="M80 20 L58 40 L72 42 Z"/>
+              <path d="M20 80 L42 60 L28 58 Z"/>
+            </g>
+          </g>
+        </svg>
+      </span>
+      <span class="brand-name">Sundial Color Works</span>
+    </a>
+
+    <nav class="menu">
+      <a href="/" class={active === 'home' ? 'is-active' : ''}>Reel</a>
+      <a href="/bio" class={active === 'bio' ? 'is-active' : ''}>Bio</a>
+      <a href="/contact" class={active === 'contact' ? 'is-active' : ''}>Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <slot />
+  </main>
+
+  <style is:global>
+    :root {
+      --bg: #08080b;
+      --ink: #f4f2ec;
+      --muted: rgba(244, 242, 236, 0.55);
+      --hairline: rgba(244, 242, 236, 0.14);
+      --hover: rgba(244, 242, 236, 0.08);
+
+      --font-display: 'Cormorant Garamond', serif;
+      --font-body: 'Inter', sans-serif;
+      --font-mono: 'IBM Plex Mono', monospace;
+
+      --nav-h: 84px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font-body);
+      min-height: 100%;
+    }
+
+    .sky {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background-image: url('/starfield.svg');
+      background-repeat: repeat;
+      background-size: 500px 500px;
+    }
+
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(20px, 4vw, 56px);
+      z-index: 10;
+      background: linear-gradient(to bottom, rgba(8,8,11,0.85), transparent);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--ink);
+    }
+
+    .brand-name {
+      font-family: var(--font-display);
+      font-weight: 500;
+      font-size: clamp(15px, 1.6vw, 19px);
+      letter-spacing: 0.04em;
+    }
+
+    .menu {
+      display: flex;
+      gap: clamp(20px, 3vw, 40px);
+    }
+
+    .menu a {
+      color: var(--muted);
+      text-decoration: none;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding-bottom: 4px;
+      border-bottom: 1px solid transparent;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+
+    .menu a:hover,
+    .menu a.is-active {
+      color: var(--ink);
+      border-bottom-color: var(--ink);
+    }
+
+    main {
+      padding-top: var(--nav-h);
+      min-height: 100vh;
+    }
+  </style>
+</body>
+</html>

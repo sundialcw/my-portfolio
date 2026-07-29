@@ -1,11 +1,200 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+// Replace with your real projects. libraryId/videoId come from your Bunny Stream dashboard.
+const reels = [
+  { no: '001', title: 'Project Title One', thumbnail: '/thumbnails/001.jpg', libraryId: 'YOUR_LIBRARY_ID', videoId: 'VIDEO_GUID_1' },
+  { no: '002', title: 'Project Title Two', thumbnail: '/thumbnails/002.jpg', libraryId: 'YOUR_LIBRARY_ID', videoId: 'VIDEO_GUID_2' },
+  { no: '003', title: 'Project Title Three', thumbnail: '/thumbnails/003.jpg', libraryId: 'YOUR_LIBRARY_ID', videoId: 'VIDEO_GUID_3' },
+  { no: '004', title: 'Project Title Four', thumbnail: '/thumbnails/004.jpg', libraryId: 'YOUR_LIBRARY_ID', videoId: 'VIDEO_GUID_4' },
+  { no: '005', title: 'Project Title Five', thumbnail: '/thumbnails/005.jpg', libraryId: 'YOUR_LIBRARY_ID', videoId: 'VIDEO_GUID_5' },
+  { no: '006', title: 'Project Title Six', thumbnail: '/thumbnails/006.jpg', libraryId: 'YOUR_LIBRARY_ID', videoId: 'VIDEO_GUID_6' },
+];
 ---
+<Layout title="Reel" active="home">
+  <section class="grid">
+    {reels.map((r) => (
+      <button
+        class="card"
+        data-library={r.libraryId}
+        data-video={r.videoId}
+        data-title={r.title}
+        aria-label={`Play ${r.title}`}
+      >
+        <img src={r.thumbnail} alt={r.title} loading="lazy" />
+        <span class="card-info">
+          <span class="card-no">No. {r.no}</span>
+          <span class="card-title">{r.title}</span>
+        </span>
+      </button>
+    ))}
+  </section>
 
-<Layout>
-	<Welcome />
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" id="lightbox-close" aria-label="Close">✕</button>
+      <div class="lightbox-frame">
+        <iframe
+          id="lightbox-iframe"
+          src=""
+          loading="lazy"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+      padding: 2px clamp(2px, 1vw, 2px);
+    }
+
+    .card {
+      position: relative;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      border: none;
+      padding: 0;
+      background: #000;
+      cursor: pointer;
+      display: block;
+    }
+
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(15%);
+      transition: transform 0.5s ease, filter 0.5s ease;
+    }
+
+    .card:hover img {
+      transform: scale(1.04);
+      filter: grayscale(0%);
+    }
+
+    .card-info {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      padding: 14px 16px;
+      background: linear-gradient(to top, rgba(8,8,11,0.85), transparent);
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
+
+    .card:hover .card-info,
+    .card:focus-visible .card-info {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .card-no {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      color: var(--ink);
+    }
+
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 8, 11, 0.92);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 5vw;
+    }
+
+    .lightbox.is-open {
+      display: flex;
+    }
+
+    .lightbox-inner {
+      width: 100%;
+      max-width: 1100px;
+    }
+
+    .lightbox-frame {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      background: #000;
+    }
+
+    .lightbox-frame iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .lightbox-close {
+      display: block;
+      margin: 0 0 12px auto;
+      background: none;
+      border: 1px solid var(--hairline);
+      color: var(--ink);
+      font-family: var(--font-mono);
+      font-size: 13px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+
+    .lightbox-close:hover {
+      border-color: var(--ink);
+    }
+  </style>
+
+  <script>
+    const lightbox = document.getElementById('lightbox') as HTMLElement;
+    const iframe = document.getElementById('lightbox-iframe') as HTMLIFrameElement;
+    const closeBtn = document.getElementById('lightbox-close') as HTMLElement;
+
+    function openLightbox(libraryId: string, videoId: string) {
+      iframe.src = `https://iframe.mediadelivery.net/embed/${libraryId}/${videoId}?autoplay=true`;
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeLightbox() {
+      lightbox.classList.remove('is-open');
+      lightbox.setAttribute('aria-hidden', 'true');
+      iframe.src = '';
+    }
+
+    document.querySelectorAll('.card').forEach((card) => {
+      card.addEventListener('click', () => {
+        const libraryId = card.getAttribute('data-library')!;
+        const videoId = card.getAttribute('data-video')!;
+        openLightbox(libraryId, videoId);
+      });
+    });
+
+    closeBtn.addEventListener('click', closeLightbox);
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+  </script>
 </Layout>
