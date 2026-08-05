@@ -4,24 +4,41 @@ import Layout from '../layouts/Layout.astro';
 
 const videoItems = [
   {
-    title: "Project Alpha - Commercial",
+    title: "Commercial Reel",
     thumbnail: "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80",
     videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4"
   },
   {
-    title: "Project Beta - Short Film",
+    title: "Feature Film Grade",
     thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80",
+    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4"
+  },
+  {
+    title: "Music Video Pass",
+    thumbnail: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=800&q=80",
+    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4"
+  },
+  {
+    title: "Documentary Color",
+    thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80",
+    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4"
+  },
+  {
+    title: "Short Film Pass",
+    thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80",
+    videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4"
+  },
+  {
+    title: "Editorial Campaign",
+    thumbnail: "https://images.unsplash.com/photo-1500462828032-59601d932620?auto=format&fit=crop&w=800&q=80",
     videoSrc: "https://www.w3schools.com/html/mov_bbb.mp4"
   }
 ];
 ---
 
-<Layout title="Portfolio">
-  <main class="container">
-    <header class="header">
-      <h1>PORTFOLIO</h1>
-    </header>
-
+<Layout title="Sundial Color Works — Reel" activeNav="reel">
+  <div class="container">
+    <!-- 16:9 Thumbnail Grid -->
     <div class="portfolio-grid">
       {videoItems.map((item) => (
         <button 
@@ -38,8 +55,9 @@ const videoItems = [
         </button>
       ))}
     </div>
-  </main>
+  </div>
 
+  <!-- Lightbox Modal -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightbox-overlay" id="lightbox-backdrop"></div>
     <div class="lightbox-content">
@@ -99,20 +117,6 @@ const videoItems = [
     margin: 0 auto;
   }
 
-  .header {
-    margin-bottom: 2.5rem;
-    text-align: center;
-    letter-spacing: 0.1em;
-  }
-
-  .header h1 {
-    font-size: 1.75rem;
-    font-weight: 500;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
-    display: inline-block;
-    padding-bottom: 0.5rem;
-  }
-
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -151,7 +155,7 @@ const videoItems = [
   .aspect-ratio-box {
     position: relative;
     width: 100%;
-    padding-top: 56.25%;
+    padding-top: 56.25%; /* 16:9 Aspect Ratio */
   }
 
   .aspect-ratio-box img {
@@ -169,7 +173,7 @@ const videoItems = [
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.75);
+    background: var(--accent-hover);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -187,7 +191,7 @@ const videoItems = [
   .video-title {
     color: #ffffff;
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
