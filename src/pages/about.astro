@@ -12,6 +12,9 @@ import Layout from '../layouts/Layout.astro';
         <p>
           Sundial Color Works is the independent grading studio of Ashley Ayarza Woods.
         </p>
+        <div class="bio-photo">
+    <img src="/portrait.jpg" alt="Ashley Ayarza Woods" />
+  </div>
         <p>
           Based in Jersey City, I approach color with a poetic sensibility, balancing harmony with tension, and depth with restraint.  Some pieces call for subtle refinements, while others require bold shifts.  In every case, I grade thoughtfully to deepen the viewer’s connection to the work and elevate their visual experience.
         </p>
@@ -41,39 +44,33 @@ import Layout from '../layouts/Layout.astro';
 
   .bio-grid {
     display: grid;
-    grid-template-columns: 1fr 300px;
-    gap: 3rem;
+    grid-template-columns: 1fr 320px; /* Adjust 320px to change the photo width */
+    gap: 4rem;
+    align-items: start;
   }
 
-  .bio-text p {
-    margin-bottom: 1.5rem;
-    font-size: 1.15rem;
-    line-height: 1.7;
-    color: rgba(255, 255, 255, 0.9);
-  }
+.bio-photo {
+  display: block;      /* Ensures it occupies its own entire horizontal line */
+  width: 100%;          /* Spans the full width of the text column */
+  margin: 3rem 0;       /* Adds generous vertical spacing above and below */
+}
 
-  .specs-block h2 {
-    font-size: 1.1rem;
-    font-weight: 400;
-    margin-bottom: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    font-family: var(--font-mono);
-    color: rgba(255, 255, 255, 0.6);
-  }
+.bio-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
 
-  .specs-block ul {
-    list-style: none;
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    line-height: 2;
-    color: rgba(255, 255, 255, 0.75);
-  }
-
+  /* Mobile layout stack */
   @media (max-width: 768px) {
     .bio-grid {
       grid-template-columns: 1fr;
-      gap: 2rem;
+      gap: 2.5rem;
+    }
+    
+    /* Place photo above or below text on mobile */
+    .bio-photo {
+      order: -1; /* Set to -1 to show photo ABOVE text on mobile, or 1 for BELOW */
     }
   }
 </style>
