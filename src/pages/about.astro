@@ -1,0 +1,84 @@
+---
+// src/pages/about.astro
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout title="About — Sundial Color Works" activeNav="about">
+  <section class="content-container">
+    <h1 class="page-title">About</h1>
+    
+    <div class="bio-grid">
+      <div class="bio-text">
+        <p>
+          Sundial Color Works is a post-production color studio specializing in commercial, narrative, and music video color grading. 
+        </p>
+        <p>
+          We focus on building thoughtful, expressive color palettes that honor the camera original while elevating the visual narrative.
+        </p>
+      </div>
+
+      <div class="specs-block">
+        <h2>Capabilities</h2>
+        <ul>
+          <li>Dolby Vision Mastering</li>
+          <li>DaVinci Resolve & Baselight Workflows</li>
+          <li>SDR & HDR Deliverables</li>
+          <li>Custom Look Development & Film Emulation</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .content-container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 0;
+  }
+
+  .page-title {
+    font-size: 2rem;
+    font-weight: 400;
+    margin-bottom: 2.5rem;
+    letter-spacing: 0.02em;
+  }
+
+  .bio-grid {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 3rem;
+  }
+
+  .bio-text p {
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    line-height: 1.7;
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .specs-block h2 {
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    font-family: var(--font-mono);
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .specs-block ul {
+    list-style: none;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 2;
+    color: rgba(255, 255, 255, 0.75);
+  }
+
+  @media (max-width: 768px) {
+    .bio-grid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+  }
+</style>

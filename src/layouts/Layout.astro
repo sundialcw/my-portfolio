@@ -15,10 +15,10 @@ const { title = "Sundial Color Works", activeNav = 'reel' } = Astro.props;
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{title}</title>
   
-  <!-- Google Fonts: Space Grotesk (Brand Title) + IBM Plex Mono (Nav & Body) -->
+  <!-- Google Fonts: Faculty Glyphic (Main/Brand) + IBM Plex Mono (Nav) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Faculty+Glyphic&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -61,8 +61,8 @@ const { title = "Sundial Color Works", activeNav = 'reel' } = Astro.props;
 
 <style is:global>
   :root {
+    --font-primary: 'Faculty Glyphic', sans-serif;
     --font-mono: 'IBM Plex Mono', monospace;
-    --font-sans: 'Space Grotesk', sans-serif;
     --bg-color: #050508;
     --text-color: #f0f0f5;
   }
@@ -74,11 +74,13 @@ const { title = "Sundial Color Works", activeNav = 'reel' } = Astro.props;
   }
 
   body {
-    font-family: var(--font-mono);
+    font-family: var(--font-primary);
     background-color: var(--bg-color);
     color: var(--text-color);
     min-height: 100vh;
     padding: 1.5rem;
+    font-size: 1.05rem;
+    line-height: 1.6;
 
     /* ORGANIC CLUSTERED STARFIELD BACKGROUND */
     background-image: 
@@ -131,11 +133,11 @@ const { title = "Sundial Color Works", activeNav = 'reel' } = Astro.props;
   }
 
   .brand-name {
-    font-family: var(--font-sans) !important;
-    font-size: 1.25rem;
-    font-weight: 500;
-    letter-spacing: 0.02em;
-    text-transform: none; /* Keeps it in standard title case */
+    font-family: var(--font-primary) !important;
+    font-size: 1.35rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    text-transform: none;
   }
 
   .site-nav {
@@ -171,3 +173,4 @@ const { title = "Sundial Color Works", activeNav = 'reel' } = Astro.props;
     }
   }
 </style>
+y
