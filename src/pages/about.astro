@@ -6,16 +6,15 @@ import Layout from '../layouts/Layout.astro';
 <Layout title="About — Sundial Color Works" activeNav="about">
   <section class="content-container">
     <h1 class="page-title">About</h1>
-    
+
+    <div class="bio-photo">
+      <img src="/Seeds2.jpg" alt="Ashley Ayarza Woods" />
+    </div>
+
     <div class="bio-text">
       <p>
         Sundial Color Works is the independent grading studio of Ashley Ayarza Woods.
       </p>
-      
-      <div class="bio-photo">
-        <img src="/Seeds2.jpg" alt="Ashley Ayarza Woods" />
-      </div>
-
       <p>
         Based in Jersey City, I approach color with a poetic sensibility, balancing harmony with tension, and depth with restraint. Some pieces call for subtle refinements, while others require bold shifts. In every case, I grade thoughtfully to deepen the viewer’s connection to the work and elevate their visual experience.
       </p>
@@ -31,9 +30,9 @@ import Layout from '../layouts/Layout.astro';
 
 <style>
   .content-container {
-    max-width: 1200px; /* Increased from 900px so it spans wider across desktop */
+    max-width: 800px;
     margin: 0 auto;
-    padding: 2rem 1.5rem;
+    padding: 2rem 0;
   }
 
   .page-title {
@@ -41,31 +40,24 @@ import Layout from '../layouts/Layout.astro';
     font-weight: 400;
     margin-bottom: 2.5rem;
     letter-spacing: 0.02em;
-    text-align: center; /* Centered to match your text */
-  }
-
-  .bio-text {
-    max-width: 1000px; /* Controls how wide the text block expands */
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .bio-text p {
-    text-align: center;
-    margin-bottom: 2rem;
   }
 
   .bio-photo {
-  display: block;
-  margin: 3rem auto;
-  text-align: center; /* Ensures smaller images stay centered */
-}
+    display: block;
+    margin-bottom: 3rem;
+  }
 
-.bio-photo img {
-  display: inline-block;
-  max-width: 100%;    /* Prevents overflowing small screens */
-  width: auto;        /* Preserves intrinsic size up to max-width */
-  height: auto;
-  margin: 0 auto;
-}
+  .bio-photo img {
+    display: block;
+    max-width: 100%;
+    width: auto;
+    height: auto;
+  }
+
+  .bio-text p {
+    font-size: 1.1rem;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    color: rgba(255, 255, 255, 0.9);
+  }
 </style>
