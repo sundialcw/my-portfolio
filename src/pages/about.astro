@@ -49,18 +49,32 @@ import Layout from '../layouts/Layout.astro';
     align-items: start;
   }
 
+    /* Center-align text and expand the column width */
+.bio-text {
+  max-width: 900px;       /* Increase from ~680px to make it wider (adjust value as needed) */
+  margin: 0 auto;         /* Centers the container horizontally on the page */
+  text-align: center;     /* Center-justifies all bio text */
+}
+
+/* Ensure paragraph text flows cleanly centered */
+.bio-text p {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* Center the image and adjust its spacing */
 .bio-photo {
-  display: block;      /* Ensures it occupies its own entire horizontal line */
-  width: 100%;          /* Spans the full width of the text column */
-  margin: 3rem 0;       /* Adds generous vertical spacing above and below */
+  display: block;
+  max-width: 100%;        /* Allows image to span up to the full 900px width */
+  margin: 3rem auto;      /* Centers the image block with top/bottom margin */
 }
 
 .bio-photo img {
   display: block;
   width: 100%;
   height: auto;
+  margin: 0 auto;
 }
-
   /* Mobile layout stack */
   @media (max-width: 768px) {
     .bio-grid {
