@@ -7,32 +7,33 @@ import Layout from '../layouts/Layout.astro';
   <section class="content-container">
     <h1 class="page-title">About</h1>
     
-    <div class="bio-grid">
-      <div class="bio-text">
-        <p>
-          Sundial Color Works is the independent grading studio of Ashley Ayarza Woods.
-        </p>
-        <div class="bio-photo">
-    <img src="/Seeds2.jpg" alt="Ashley Ayarza Woods" />
-  </div>
-        <p>
-          Based in Jersey City, I approach color with a poetic sensibility, balancing harmony with tension, and depth with restraint.  Some pieces call for subtle refinements, while others require bold shifts.  In every case, I grade thoughtfully to deepen the viewer’s connection to the work and elevate their visual experience.
-        </p>
-        <p>Beyond pure aestheticism, my process is grounded in analytical thinking and logical troubleshooting. Whether designing custom workflows, or stepping in to a team’s pre-established pipeline, I offer a calm and flexible solutions-oriented partnership.
-        </p>
-        <p>
-          I operate remote-first with options for virtual collaboration, and am also available for on-site work throughout the tri-state area and beyond.
-        </p>
+    <div class="bio-text">
+      <p>
+        Sundial Color Works is the independent grading studio of Ashley Ayarza Woods.
+      </p>
+      
+      <div class="bio-photo">
+        <img src="/Seeds2.jpg" alt="Ashley Ayarza Woods" />
       </div>
+
+      <p>
+        Based in Jersey City, I approach color with a poetic sensibility, balancing harmony with tension, and depth with restraint. Some pieces call for subtle refinements, while others require bold shifts. In every case, I grade thoughtfully to deepen the viewer’s connection to the work and elevate their visual experience.
+      </p>
+      <p>
+        Beyond pure aestheticism, my process is grounded in analytical thinking and logical troubleshooting. Whether designing custom workflows, or stepping in to a team’s pre-established pipeline, I offer a calm and flexible solutions-oriented partnership.
+      </p>
+      <p>
+        I operate remote-first with options for virtual collaboration, and am also available for on-site work throughout the tri-state area and beyond.
+      </p>
     </div>
   </section>
 </Layout>
 
 <style>
   .content-container {
-    max-width: 900px;
+    max-width: 1200px; /* Increased from 900px so it spans wider across desktop */
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 2rem 1.5rem;
   }
 
   .page-title {
@@ -40,51 +41,30 @@ import Layout from '../layouts/Layout.astro';
     font-weight: 400;
     margin-bottom: 2.5rem;
     letter-spacing: 0.02em;
+    text-align: center; /* Centered to match your text */
   }
 
-  .bio-grid {
-    display: grid;
-    grid-template-columns: 1fr 320px; /* Adjust 320px to change the photo width */
-    gap: 4rem;
-    align-items: start;
+  .bio-text {
+    max-width: 1000px; /* Controls how wide the text block expands */
+    margin: 0 auto;
+    text-align: center;
   }
 
-    /* Center-align text and expand the column width */
-.bio-text {
-  max-width: 900px;       /* Increase from ~680px to make it wider (adjust value as needed) */
-  margin: 0 auto;         /* Centers the container horizontally on the page */
-  text-align: center;     /* Center-justifies all bio text */
-}
+  .bio-text p {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
 
-/* Ensure paragraph text flows cleanly centered */
-.bio-text p {
-  text-align: center;
-  margin-bottom: 2rem;
-}
+  .bio-photo {
+    display: block;
+    max-width: 100%;
+    margin: 3rem auto;
+  }
 
-/* Center the image and adjust its spacing */
-.bio-photo {
-  display: block;
-  max-width: 100%;        /* Allows image to span up to the full 900px width */
-  margin: 3rem auto;      /* Centers the image block with top/bottom margin */
-}
-
-.bio-photo img {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
-}
-  /* Mobile layout stack */
-  @media (max-width: 768px) {
-    .bio-grid {
-      grid-template-columns: 1fr;
-      gap: 2.5rem;
-    }
-    
-    /* Place photo above or below text on mobile */
-    .bio-photo {
-      order: -1; /* Set to -1 to show photo ABOVE text on mobile, or 1 for BELOW */
-    }
+  .bio-photo img {
+    display: block;
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
   }
 </style>
