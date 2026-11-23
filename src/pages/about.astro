@@ -5,7 +5,6 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout title="About — Sundial Color Works" activeNav="about">
   <section class="content-container">
-    <h1 class="page-title">About</h1>
 
     <div class="bio-photo">
       <img src="/Seeds2.jpg" alt="Ashley Ayarza Woods" />
@@ -26,32 +25,79 @@ import Layout from '../layouts/Layout.astro';
       </p>
     </div>
 
-    <div class="socials-block">
-      <h2>Connect</h2>
-      <ul>
-        <li><a href="https://instagram.com/YOUR_HANDLE" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-        <li><a href="https://linkedin.com/in/YOUR_HANDLE" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-      </ul>
+    <!-- Accordion Details Section -->
+    <div class="details-group">
+      
+      <!-- 1. Services -->
+      <details class="cv-accordion">
+        <summary><h2>Services</h2></summary>
+        <div class="accordion-content">
+          <ul>
+            <li>Commercial & Brand Color Grading</li>
+            <li>Narrative Feature & Short Film Grading</li>
+            <li>Music Videos & Editorial Projects</li>
+            <li>Dolby Vision & HDR/SDR Mastering</li>
+            <li>Custom Look Development & LUT Design</li>
+            <li>Remote Real-Time Monitoring & Streaming Reviews</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- 2. Experience -->
+      <details class="cv-accordion">
+        <summary><h2>Experience</h2></summary>
+        <div class="accordion-content">
+          <div class="history-item">
+            <span class="role">Colorist & Owner</span>
+            <span class="separator">—</span>
+            <span class="company">Sundial Color Works</span>
+          </div>
+          <div class="history-item">
+            <span class="role">Post-Production Manager</span>
+            <span class="separator">—</span>
+            <span class="company">Condé Nast Entertainment</span>
+          </div>
+          <div class="history-item">
+            <span class="role">Colorist</span>
+            <span class="separator">—</span>
+            <span class="company">Nice Shoes</span>
+          </div>
+          <div class="history-item">
+            <span class="role">Colorist</span>
+            <span class="separator">—</span>
+            <span class="company">The Mill</span>
+          </div>
+        </div>
+      </details>
+
+      <!-- 3. Education -->
+      <details class="cv-accordion">
+        <summary><h2>Education</h2></summary>
+        <div class="accordion-content">
+          <div class="history-item">
+            <span class="role">B.A. Art History & Film</span>
+            <span class="separator">—</span>
+            <span class="company">Northwestern University</span>
+          </div>
+        </div>
+      </details>
+
     </div>
   </section>
 </Layout>
 
 <style>
   .content-container {
-    max-width: 800px;
+    max-width: 1200px; /* Widened to match header boundary */
+    width: 100%;
     margin: 0 auto;
     padding: 2rem 0;
   }
 
-  .page-title {
-    font-size: 2rem;
-    font-weight: 400;
-    margin-bottom: 2.5rem;
-    letter-spacing: 0.02em;
-  }
-
+  /* Centered Photo */
   .bio-photo {
-    display: block;
+    display: flex;
+    justify-content: center;
     margin-bottom: 3rem;
   }
 
@@ -60,52 +106,126 @@ import Layout from '../layouts/Layout.astro';
     max-width: 100%;
     width: auto;
     height: auto;
+    margin: 0 auto;
+  }
+
+  /* Left-aligned Bio Paragraphs */
+  .bio-text {
+    width: 100%;
+    margin: 0 auto;
+    text-align: left;
   }
 
   .bio-text p {
-    font-size: 1.1rem;
+    font-size: 1.05rem;
+    font-weight: 300;
     line-height: 1.7;
-    margin-bottom: 2rem;
-    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 1.75rem;
+    color: rgba(255, 255, 255, 0.8);
+    text-align: left;
   }
 
-  /* Socials styling matching capabilities typography */
-  .socials-block {
-    margin-top: 3.5rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.1); /* Subtle divider line */
+  .details-group {
+    width: 100%;
+    margin: 3.5rem auto 0 auto;
   }
 
-  .socials-block h2 {
+  .cv-accordion {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    padding-top: 0.85rem;
+    margin-top: 0.85rem;
+  }
+
+  /* Centered Accordion Titles */
+  .cv-accordion summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .cv-accordion summary h2 {
     font-family: var(--font-mono);
-    font-size: 0.8rem;
-    font-weight: 400;
+    font-size: 0.85rem;
+    font-weight: 600;
     text-transform: lowercase;
     letter-spacing: 0.05em;
-    color: rgba(255, 255, 255, 0.5);
-    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.75);
+    margin: 0;
+    display: inline-block;
   }
 
-  .socials-block ul {
+  .cv-accordion summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .cv-accordion summary::after {
+    content: '+';
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    transition: color 0.2s ease;
+  }
+
+  .cv-accordion[open] summary::after {
+    content: '−';
+  }
+
+  .cv-accordion summary:hover h2,
+  .cv-accordion summary:hover::after {
+    color: #ffffff;
+  }
+
+  /* Left-aligned Pulldown Content */
+  .accordion-content {
+    padding-top: 0.75rem;
+    padding-bottom: 0.5rem;
+    text-align: left;
+  }
+
+  .accordion-content ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    gap: 1.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
   }
 
-  .socials-block a {
+  .accordion-content li {
     font-family: var(--font-mono);
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     color: rgba(255, 255, 255, 0.85);
-    text-decoration: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    padding-bottom: 2px;
-    transition: all 0.2s ease;
+    text-align: left;
   }
 
-  .socials-block a:hover {
-    color: #ffffff;
-    border-color: #ffffff;
+  .history-item {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .history-item:last-child {
+    margin-bottom: 0;
+  }
+
+  .history-item .role {
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .history-item .separator {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  .history-item .company {
+    color: rgba(255, 255, 255, 0.5);
   }
 </style>

@@ -8,39 +8,38 @@ const videoItems = [
   {
     title: "Commercial Reel",
     thumbnail: "https://images.unsplash.com/photo-1536240478700-b869070f9279?auto=format&fit=crop&w=800&q=80",
-    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b" // <-- Your first Bunny Stream video
+    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b"
   },
   {
     title: "Feature Film Grade",
     thumbnail: "https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=800&q=80",
-    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b" // <-- Replace with next Bunny Video ID
+    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b"
   },
   {
     title: "Music Video Pass",
     thumbnail: "https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=800&q=80",
-    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b" // <-- Replace with next Bunny Video ID
+    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b"
   },
   {
     title: "Documentary Color",
     thumbnail: "https://images.unsplash.com/photo-1574717024653-61fd2cf4d44d?auto=format&fit=crop&w=800&q=80",
-    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b" // <-- Replace with next Bunny Video ID
+    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b"
   },
   {
     title: "Short Film Pass",
     thumbnail: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=800&q=80",
-    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b" // <-- Replace with next Bunny Video ID
+    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b"
   },
   {
     title: "Editorial Campaign",
     thumbnail: "https://images.unsplash.com/photo-1500462828032-59601d932620?auto=format&fit=crop&w=800&q=80",
-    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b" // <-- Replace with next Bunny Video ID
+    bunnyVideoId: "ab0201e5-7f5a-45ce-9cc9-1b8f2af4034b"
   }
 ];
 ---
 
 <Layout title="Sundial Color Works — Reel" activeNav="reel">
   <div class="container">
-    <!-- 16:9 Thumbnail Grid -->
     <div class="portfolio-grid">
       {videoItems.map((item) => (
         <button 
@@ -60,7 +59,6 @@ const videoItems = [
     </div>
   </div>
 
-  <!-- Lightbox Modal -->
   <div id="lightbox" class="lightbox" aria-hidden="true">
     <div class="lightbox-overlay" id="lightbox-backdrop"></div>
     <div class="lightbox-content">
@@ -87,7 +85,6 @@ const videoItems = [
 
   function openLightbox(libraryId: string, videoId: string) {
     if (!lightbox || !lightboxPlayer) return;
-    // Builds the Bunny Stream embed URL with autoplay enabled when clicked
     lightboxPlayer.src = `https://player.mediadelivery.net/embed/${libraryId}/${videoId}?autoplay=true&loop=false&muted=false&preload=true&responsive=true`;
     lightbox.classList.add('active');
     lightbox.setAttribute('aria-hidden', 'false');
@@ -95,7 +92,6 @@ const videoItems = [
 
   function closeLightbox() {
     if (!lightbox || !lightboxPlayer) return;
-    // Clearing src stops the video and audio immediately on close
     lightboxPlayer.src = '';
     lightbox.classList.remove('active');
     lightbox.setAttribute('aria-hidden', 'true');
@@ -130,3 +126,153 @@ const videoItems = [
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .portfolio-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .thumbnail-card {
+    background: none;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    padding: 0;
+    overflow: hidden;
+    outline: none;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+    width: 100%;
+  }
+
+  .thumbnail-card:hover,
+  .thumbnail-card:focus-visible {
+    border-color: rgba(255, 255, 255, 0.6);
+    transform: translateY(-2px);
+  }
+
+  .aspect-ratio-box {
+    position: relative;
+    width: 100%;
+    padding-top: 56.25%;
+  }
+
+  .aspect-ratio-box img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--accent-hover);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.25s ease;
+    padding: 1rem;
+    text-align: center;
+  }
+
+  .thumbnail-card:hover .overlay,
+  .thumbnail-card:focus-visible .overlay {
+    opacity: 1;
+  }
+
+  .video-title {
+    color: #ffffff;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .lightbox {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+  }
+
+  .lightbox.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .lightbox-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    backdrop-filter: blur(4px);
+  }
+
+  .lightbox-content {
+    position: relative;
+    width: 90%;
+    max-width: 1000px;
+    z-index: 1001;
+  }
+
+  .video-wrapper {
+    position: relative;
+    padding-top: 56.25%;
+    background: #000;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .video-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    outline: none;
+  }
+
+  .close-btn {
+    position: absolute;
+    top: -2.5rem;
+    right: 0;
+    background: none;
+    border: none;
+    color: #fff;
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+
+  .close-btn:hover {
+    opacity: 1;
+  }
+</style>
